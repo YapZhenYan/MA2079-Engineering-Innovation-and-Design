@@ -18,7 +18,8 @@ The software of leAFS is build using Arduino Uno and basic C++ language using Ar
 * 1 Liquid Crystal Display (LCD) & 2 RGB LEDs
 * 2 Ultrasonic Sensors:
 * 1 360 High Torque Servo Motor
-Refer to [functions.md](https://github.com/YapZhenYan/MA2079-Engineering-Innovation-and-Design/blob/main/functions.md) for more details on the functions for each of the components and the circuit diagram for the connection of the components.
+
+Refer to [functions.md](https://github.com/YapZhenYan/MA2079-Engineering-Innovation-and-Design/blob/main/functions.md) for more details on the functions for each of the components and the [circuit diagram](https://github.com/YapZhenYan/MA2079-Engineering-Innovation-and-Design/blob/main/leAFS%20Schematic%20Diagram.pdf) for the connection of the components.
 
 ### Some improvements to consider:
 * Scale down the size of leAFS
