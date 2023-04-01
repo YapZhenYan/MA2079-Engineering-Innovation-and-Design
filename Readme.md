@@ -4,7 +4,7 @@ leAFS is an automatic 360 table sanitiser incorporated with an air purifier. It 
 The software of leAFS is build using Arduino Uno and basic C++ language using Arduino IDE platform. The system consists of 2 parts: the sanitiser (middle portion) and the air purifier (bottom portion).
 
 <img width="185" alt="image" src="https://user-images.githubusercontent.com/122852792/229262506-194347ba-0049-42d4-8c8d-479e5e175316.png"> 
-[![Watch the full video](https://user-images.githubusercontent.com/122852792/229262905-abc1ff73-0e79-40f0-9151-3a1ef38733d6.mp4)]
+[Full Video](https://user-images.githubusercontent.com/122852792/229262905-abc1ff73-0e79-40f0-9151-3a1ef38733d6.mp4)
 
 ### Mechatronic Components used:
 * 2 Arduino UNO R3
@@ -18,7 +18,7 @@ The software of leAFS is build using Arduino Uno and basic C++ language using Ar
 * 1 Liquid Crystal Display (LCD) & 2 RGB LEDs
 * 2 Ultrasonic Sensors:
 * 1 360 High Torque Servo Motor
-Refer to functions.md for more details on the functions for each of the components and the circuit diagram for the connection of the components.
+Refer to [functions.md](https://github.com/YapZhenYan/MA2079-Engineering-Innovation-and-Design/blob/main/functions.md) for more details on the functions for each of the components and the circuit diagram for the connection of the components.
 
 ### Some improvements to consider:
 * Scale down the size of leAFS
