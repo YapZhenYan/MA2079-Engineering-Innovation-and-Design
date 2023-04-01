@@ -1,27 +1,28 @@
-  #include <SoftwareSerial.h>
+// Respective libaries
+#include <SoftwareSerial.h>
 #include <Wire.h>
-#include <Servo.h>  
-#define liq_trigPin 3                  // ultrasonic sensor for liq
-#define liq_echoPin 4                 // ultrasonic sensor for liq
-#define trigPin 10                      // ultrasonic sensor for manual mode
-#define echoPin 11                    // ultrasonic sensor for manual mode
-#define System_pin 6                  // on and off
-#define Mode_pin 5                    // manual & automatic
-#define buzzer A2
-#define BlueLED 12
-#define GreenLED 13
+#include <Servo.h>
+
+// parameters
+#define liq_trigPin 3                 // ultrasonic sensor for liq
+#define liq_echoPin 4                 
+#define Mode_pin 5                    // manual & automatic mode
+#define System_pin 6                  // on and off button
 #define RedLED 7
 #define Blue 8 
+#define trigPin 10                    // ultrasonic sensor for manual mode
+#define echoPin 11                    
+#define BlueLED 12
+#define GreenLED 13
+#define buzzer A2
+
 int system_state;
 int mode_state;
 bool buzz = true;
 int liq;
-
 Servo myservo;
 
 void setup() {
-
-//Serial.begin(9600);
 Wire.begin();
 pinMode(System_pin, INPUT);
 pinMode(Mode_pin, INPUT);
@@ -30,13 +31,12 @@ pinMode(GreenLED, OUTPUT);
 pinMode(RedLED, OUTPUT);
 pinMode(Blue, OUTPUT);
 pinMode(buzzer, OUTPUT);
-pinMode(liq_trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
-pinMode(liq_echoPin, INPUT); // Sets the echoPin as an INPUT
-pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
-pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
+pinMode(liq_trigPin, OUTPUT); 
+pinMode(liq_echoPin, INPUT); 
+pinMode(trigPin, OUTPUT); 
+pinMode(echoPin, INPUT); 
 myservo.attach(9);            
 }
-
 
 void loop() {
   system_state = digitalRead(System_pin);
@@ -55,7 +55,7 @@ void loop() {
   else if (system_state == HIGH && buzz == false && mode_state == HIGH)      // automatic mode  --> Green LED
   { 
     int mode = 3;
-    liq_detection();                                        //Red blink --> Low liq,  Red --> No liq,
+    liq_detection();                  //Red blink --> Low liq,  Red --> No liq,
     delay(1000);
     int outcome = mode + liq;
     Wire.beginTransmission(9);
@@ -63,7 +63,7 @@ void loop() {
     Wire.endTransmission();
     digitalWrite(BlueLED, LOW);
     digitalWrite(GreenLED,HIGH);
-    spray();                           // spray mechanism
+    spray();
     delay(500);
     return;
   }
@@ -78,11 +78,11 @@ void loop() {
     Wire.endTransmission();
     digitalWrite(GreenLED, LOW);
     digitalWrite(BlueLED, HIGH);
-    manual_detection();                        // manual detection + spray
+    manual_detection();
     return;
   }
 
-  else                     // off the system
+  else                      // off the system
   {
     buzz = true;
     int outcome = 6;
@@ -96,7 +96,6 @@ void loop() {
     return;
   }
 }
-
 
 void liq_detection()
 {
@@ -112,30 +111,28 @@ void liq_detection()
   // Distance is half the duration devided by 29.1 (from datasheet)
   liq_distance = (liq_duration/2) / 29.1;
   delay(500);
- //Serial.println(liq_distance);
-  //delay(500);
-  if (liq_distance >=0 && liq_distance <= 6)   // suff liq.
+
+  if (liq_distance >=0 && liq_distance <= 6)    // suff liq. -> No Light
     {
       liq = 0;
       digitalWrite(Blue, LOW);
       digitalWrite(RedLED, LOW);           
     }
-    else if (liq_distance >= 12)      // no liq
+    else if (liq_distance >= 12)               // no liq -> Red Light
     {
       liq = 2;
       digitalWrite(Blue, LOW);
-      digitalWrite(RedLED, HIGH);           // Red
+      digitalWrite(RedLED, HIGH);           
       
     }
     else
     {
-      liq = 1;                      // Purple
+      liq = 1;                                   // low liq -> Purple
       digitalWrite(RedLED, HIGH);
       digitalWrite(Blue, HIGH);
       }
     }
       
-
 void manual_spray()
 {
   myservo.attach(9);
@@ -153,21 +150,20 @@ void manual_spray()
 
 void manual_detection()
 {
-  int duration, distance;     // Duration will be the input pulse width and distance will be the distance to the obstacle in centimeters
+  int duration, distance;     
   digitalWrite(trigPin, HIGH); 
   delayMicroseconds(2);
   digitalWrite(trigPin, LOW);
   delayMicroseconds(10);
-  duration = pulseIn(echoPin, HIGH);    // Measure the pulse input in echo pin
-  distance = (duration/2) / 29.1;         // Distance is half the duration devided by 29.1 (from datasheet)
+  duration = pulseIn(echoPin, HIGH);   
+  distance = (duration/2) / 29.1;         
   delay(500);
-  //Serial.println(distance);
-  //delay(1000);
+
   if (distance>= 0 && distance <= 7)
     {
-      tone(buzzer, 300, 300);  // buzzer will buzz to show successful detection
+      tone(buzzer, 300, 300);          // buzzer will buzz to show successful detection
       delay(2000);
-      for (int i =0; i<=2; i++)   // buzzer will buzz 3times before spraying
+      for (int i =0; i<=2; i++)        // buzzer will buzz 3 times before spraying
       {
       tone(buzzer, 200, 1000);
       delay(500);
@@ -193,7 +189,7 @@ void spray()
     delay(500);
     if (j == 12)
     {
-      for (int i =0; i<=2; i++)   // buzzer will buzz 3times before spraying
+      for (int i =0; i<=2; i++)         // buzzer will buzz 3times before spraying
       {
       tone(buzzer, 200, 1000);
       delay(500);
