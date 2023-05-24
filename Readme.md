@@ -25,5 +25,5 @@ Refer to [functions.md](https://github.com/YapZhenYan/MA2079-Engineering-Innovat
 * Scale down the size of leAFS
 * Build a PCB board instead and use esp32
 * Build a stronger sanitiser system (add more motors, change the structure)
-* Include a purification detection system to determine how purified the air is from the HEPA Filter
-* Enable the sanitiser system to sanitise at different range
+* Include a purification detection system to determine how much air is undergoing purification from the HEPA Filter
+* Enable the sanitiser system to sanitise at different range catering to different table size
